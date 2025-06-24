@@ -2,7 +2,7 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-300 shadow-sm">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">DevTinder-Web</a>
+        <a className="btn btn-ghost text-xl">JobSwiper-Web</a>
       </div>
       <div className="dropdown dropdown-end mx-5">
         <div

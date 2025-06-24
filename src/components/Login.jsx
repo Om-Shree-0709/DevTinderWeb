@@ -1,7 +1,74 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 
 const Login = () => {
-  return <h1>Login Component</h1>;
+  const [email, setEmailId] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await axios.post(
+        "http://localhost:3000/login",
+        {
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      console.log("Login successful:", res.data);
+      alert("Login successful");
+    } catch (error) {
+      console.error("Login error:", error.response?.data || error.message);
+
+      alert(error);
+    }
+  };
+
+  return (
+    <div className="flex justify-center">
+      <div className="card w-96 bg-base-300 shadow-xl mt-20 mb-20">
+        <form className="card-body" onSubmit={handleLogin}>
+          <h2 className="text-2xl font-semibold text-center mb-4">Login</h2>
+
+          <legend className="text-sm font-medium mb-1">Email</legend>
+          <label className="input input-bordered flex items-center gap-2 mb-4">
+            <span className="font-medium">📧</span>
+            <input
+              type="email"
+              placeholder="Enter your Email"
+              className="grow"
+              value={email}
+              onChange={(e) => setEmailId(e.target.value)}
+              required
+            />
+          </label>
+
+          <legend className="text-sm font-medium mb-1">Password</legend>
+          <label className="input input-bordered flex items-center gap-2 mb-6">
+            <span className="font-medium">🔒</span>
+            <input
+              type="password"
+              placeholder="Enter your Password"
+              className="grow"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </label>
+
+          <div className="card-actions justify-end">
+            <button type="submit" className="btn btn-primary w-full">
+              Login
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 };
 
 export default Login;
