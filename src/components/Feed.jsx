@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { BASE_URL } from "../utils/constants";
 
 const Feed = () => {
   const [posts, setPosts] = useState([]);
@@ -8,7 +9,7 @@ const Feed = () => {
   useEffect(() => {
     const fetchFeed = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/feed", {
+        const res = await axios.get(BASE_URL + "/feed", {
           withCredentials: true,
         });
         setPosts(res.data);

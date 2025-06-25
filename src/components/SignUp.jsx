@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
 
 const Signup = () => {
   const [firstName, setFirstName] = useState("");
@@ -8,6 +10,7 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [age, setAge] = useState("");
   const [gender, setGender] = useState("");
+  const navigate = useNavigate();
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -23,7 +26,7 @@ const Signup = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/signup",
+        BASE_URL + "/signup",
         {
           firstName,
           lastName,
@@ -38,6 +41,7 @@ const Signup = () => {
       );
       console.log("SignUp successful:", res.data);
       alert("SignUp successful");
+      navigate("/login");
     } catch (error) {
       const errorMsg =
         error.response?.data?.error || error.message || "Something went wrong!";
