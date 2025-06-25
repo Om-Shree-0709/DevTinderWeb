@@ -23,7 +23,7 @@ const Login = () => {
         }
       );
 
-      console.log("Login successful:", res.data);
+      console.log("Login successful");
       dispatch(addUser(res.data));
       alert("Login successful");
     } catch (error) {
